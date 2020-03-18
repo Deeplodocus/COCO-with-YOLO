@@ -1,0 +1,15 @@
+method: sequential
+name: Transformer for COCO input
+mandatory_transforms_start:
+  - format_labels:
+      name: reformat_pointer
+      module: deeplodocus.app.transforms.yolo.input
+      kwargs:
+        n_obj: 100
+  - resize:
+      name: resize
+      module: deeplodocus.app.transforms.yolo.input
+      kwargs:
+        shape: [448, 448]
+transforms: Null
+mandatory_transforms_end: Null

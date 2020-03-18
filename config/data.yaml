@@ -1,0 +1,73 @@
+dataloader:
+  batch_size: 4
+  num_workers: 8
+enabled:
+  train: True         # Enable the trainer
+  validation: False   # Enable the validator
+  test: False         # There is no tester
+  predict: False      # Do enable the predictor
+datasets:
+  # Training set
+  - name: COCO Train 2017
+    type: train
+    num_instances: Null
+    entries:
+      # Input
+      - name: COCO Image
+        type: input
+        load_as: image
+        convert_to: float32
+        move_axis: [2, 0, 1]
+        enable_cache: True
+        sources:
+          - name: CocoDetection
+            module: torchvision.datasets
+            kwargs:
+              root: data/train2017
+              annFile: data/annotations/instances_train2017.json
+      # Label
+      - name: COCO Label
+        type: label
+        load_as: given
+        convert_to: float32
+        move_axis: Null
+        enable_cache: False
+        sources:
+          - name: SourcePointer     # Point to an existing data source
+            module: Null
+            kwargs:
+              entry_id: 0           # From the first entry
+              source_id: 0          # From the first source
+              instance_id: 1        # Load the second item
+  # Validation set
+  - name: Validation MNIST
+    type: validation
+    num_instances: Null
+    entries:
+      - name: MNIST Image
+        type: input
+        load_as: image
+        convert_to: float32
+        move_axis: [2, 0, 1]
+        enable_cache: True
+        sources:
+          - name: MNIST
+            module: torchvision.datasets
+            kwargs:
+              root: ./data/MNIST
+              train: False          # Use validation data
+              download: True
+      # Label
+      - name: MNIST Label
+        type: label
+        load_as: integer
+        convert_to: int64
+        move_axis: Null
+        enable_cache: False
+        sources:
+          - name: SourcePointer    # Point to an existing data source
+            module: Null
+            kwargs:
+              entry_id: 0           # From the first entry
+              source_id: 0          # From the first source
+              instance_id: 1        # Load the second item

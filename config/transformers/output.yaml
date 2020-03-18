@@ -1,0 +1,33 @@
+# For more information about output transformers visit www.deeplodocus.org
+
+skip: &skip
+  20
+initial_skip: &initial_skip
+  50
+
+name: Output Transformer
+transforms:
+  ConcatenateDetections:
+    name: Concatenate
+    module: deeplodocus.app.transforms.yolo.output
+    kwargs:
+      skip: *skip
+      initial_skip: *initial_skip
+  NonMaximumSuppression:
+    name: NonMaximumSuppression
+    module: deeplodocus.app.transforms.yolo.output
+    kwargs:
+      iou_threshold: 0.5
+      obj_threshold: 0.5
+      skip: *skip
+      initial_skip: *initial_skip
+  Visualization:
+    name: Visualize
+    module: deeplodocus.app.transforms.yolo.output
+    kwargs:
+      rows: Null
+      scale: 1
+      wait: 3
+      width: 2
+      skip: *skip
+      initial_skip: *initial_skip

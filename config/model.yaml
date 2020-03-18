@@ -1,0 +1,15 @@
+name: YOLO
+module: deeplodocus.app.models.yolo
+from_file: False
+file: False
+input_size:
+  - [3, 512, 512]
+kwargs:
+  num_classes: 91
+  skip_layers: [8, 13]
+  backbone:
+    name: Darknet19
+    module: deeplodocus.app.models.darknet
+    kwargs:
+      num_channels: 3
+      include_top: False

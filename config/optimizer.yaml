@@ -1,0 +1,4 @@
+name: "Adam"
+module: "torch.optim"
+kwargs:
+  lr: 0.0001

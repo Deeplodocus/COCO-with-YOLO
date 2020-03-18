@@ -1,0 +1,10 @@
+session: version01
+cv_library: opencv
+device: auto
+device_ids: auto
+logs:
+  history_train_batches: True
+  history_train_epochs: True
+  history_validation: True
+  notification: True
+on_wake: Null
