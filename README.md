@@ -6,26 +6,26 @@ In this tutorial, we will walk through each step to configure a Deeplodocus proj
 
 **Prerequisite steps:**
 
-1. [Download the COCO Detection Dataset](#1-Download)
-2. [Install pycocotools](#2-install-pycocotools)
+1. [Download the COCO Detection Dataset](#1-Download-the COCO-Detection Dataset)
+2. [Install pycocotools](#2-Install-pycocotools)
 
 **Project setup:**
 
-1. [Initialise a new project](#1-initialise-the-project)
-2. [Data Configuration](#2-data-configuration)
-3. [Model Configuration](#3-model-configuration)
-4. [Loss & Metric Configuration](#4-loss-metric-configuration)
-5. [Optimiser Configuration](#5-optimiser-configuration)
-6. [Transformer Configuration](#6-transformer-configuration)
-    - [Input Transformer](#51-input-transformer)
-    - [Output Transformer](#52-output-transformer)
-7. [Training](#7-training)
+1. [Initialise the Project](#1-Initialise-the-Project)
+2. [Data Configuration](#2-Data-Configuration)
+3. [Model Configuration](#3-Model-Configuration)
+4. [Loss & Metric Configuration](#4-Loss-Metric-Configuration)
+5. [Optimiser Configuration](#5-Optimiser-Configuration)
+6. [Transformer Configuration](#6-Transformer-Configuration)
+    - [Input Transformer](#51-Input-Transformer)
+    - [Output Transformer](#52-Output-Transformer)
+7. [Training](#7-Training)
 
 A copy of this project can be cloned from [here](https://github.com/Deeplodocus/COCO-with-YOLO) - but don't forget to follow the prerequisite steps below. 
 
 ## Prerequisite Steps
 
-### 1. Download
+### 1. Download the COCO Detection Dataset
 
 First of all, let's download the appropriate data from the [COCO website](http://cocodataset.org/).
 
