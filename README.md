@@ -25,7 +25,7 @@ A copy of this project can be cloned from [here](https://github.com/Deeplodocus/
 
 ## Prerequisite Steps
 
-### 1 Download
+### 1. Download
 
 First of all, let's download the appropriate data from the [COCO website](http://cocodataset.org/).
 
