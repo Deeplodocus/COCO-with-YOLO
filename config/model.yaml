@@ -1,15 +1,14 @@
-name: YOLO
-module: deeplodocus.app.models.yolo
-from_file: False
-file: False
-input_size:
-  - [3, 512, 512]
-kwargs:
-  num_classes: 91
-  skip_layers: [8, 13]
-  backbone:
-    name: Darknet19
-    module: deeplodocus.app.models.darknet
-    kwargs:
-      num_channels: 3
-      include_top: False
+name: YOLO                              # Select YOLO
+module: deeplodocus.app.models.yolo     # From the deeplodocus app
+from_file: False                        # Don't try to load from file
+file: Null                              # No need to specify a file to load from
+input_size:                             # Specify the input size
+  - [3, 448, 448]
+kwargs:                                 # Keyword arguments for the model class
+  num_classes: 91                       # Number of classes in COCO
+  backbone:                             # Specify the backbone
+    name: Darknet19                     # Select Darknet53 (Darknet19 is also available)
+    module: deeplodocus.app.models.darknet      # Point to the darknet module
+    kwargs:                                     # Keyword arguments for the backbone
+      num_channels: 3                           # Tell it to expect an input with 3 channels
+      include_top: False                        # Don't include the classifier

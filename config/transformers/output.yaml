@@ -1,9 +1,14 @@
-# For more information about output transformers visit www.deeplodocus.org
-
+# Define skip - for use in multiple transforms
+# A skip of 20 will cause the transforms to only process every 20th batch.
+# (We may not want to visualise every batch.)
 skip: &skip
-  20
+  100
+
+# Sometimes there can be lots of false detections at the beginning of training
+# This can slow things down
+# Use initial skip to skip the first few batches of the first epoch
 initial_skip: &initial_skip
-  50
+  1000
 
 name: Output Transformer
 transforms:
@@ -11,23 +16,26 @@ transforms:
     name: Concatenate
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      skip: *skip
+      skip: *skip                   # How many batches to skip
       initial_skip: *initial_skip
   NonMaximumSuppression:
     name: NonMaximumSuppression
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      iou_threshold: 0.5
-      obj_threshold: 0.5
-      skip: *skip
+      iou_threshold: 0.5            # IoU threshold for NMS
+      obj_threshold: 0.5            # Threshold for suppression by objectness score
+      skip: *skip                   # How many batches to skip
       initial_skip: *initial_skip
   Visualization:
     name: Visualize
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      rows: Null
-      scale: 1
-      wait: 3
-      width: 2
-      skip: *skip
+      rows: Null                    # No. of rows when displaying images
+      cols: Null                    # No. of cols when displaying images
+      scale: 0.5                    # Re-scale the images before displaying
+      wait: 1                       # How long to wait (ms) (0 = wait for a keypress)
+      width: 2                      # Line width for drawing boxes
+      lab_col: [32, 200, 32]        # Color for drawing ground truth boxes (BGR)
+      det_col: [32, 32, 200]        # Color for drawing model detections (BGR)
+      skip: *skip                   # How many batches to skip
       initial_skip: *initial_skip

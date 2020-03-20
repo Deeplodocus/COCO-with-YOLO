@@ -1,15 +1,49 @@
 dataloader:
-  batch_size: 4
-  num_workers: 8
+  batch_size: 16        # Possible batch sizes will depend on the available memory
+  num_workers: 15       # This will depend on your CPU, you probably have at least 4 cores
 enabled:
-  train: True         # Enable the trainer
-  validation: False   # Enable the validator
-  test: False         # There is no tester
-  predict: False      # Do enable the predictor
+  train: True           # Enable the trainer
+  validation: True      # Enable the validator
+  test: False           # There is no test data
+  predict: False        # There is no prediction data
 datasets:
-  # Training set
-  - name: COCO Train 2017
-    type: train
+  # Training portion
+  - name: COCO Train 2017           # Human-readable name
+    type: train                     # Dataset type (train/validation/test/predict)
+    num_instances: Null             # Number of instances to use (Null = use all)
+    entries:                        # Define the input and label entries
+      # Input Entry
+      - name: COCO Image            # Human-readable name
+        type: input                 # Entry type (input/label/additional data)
+        load_as: image              # Load data as image
+        convert_to: float32         # Convert to float32 (after data transforms)
+        move_axis: [2, 0, 1]        # Permute : (h x w x ch) to (ch x h x w)
+        enable_cache: True          # Give other entries access to this entry
+        # We define one source for this entry - CocoDetection from torchvision
+        sources:
+          - name: CocoDetection
+            module: torchvision.datasets
+            kwargs:
+              root: data/train2017
+              annFile: data/annotations/instances_train2017.json
+      # Label Entry
+      - name: COCO Label            # Human-readable name
+        type: label                 # Entry type (input/label/additional data)
+        load_as: given              # Do not change data type on loading
+        convert_to: float32         # Convert to float32 (after data transforms)
+        move_axis: Null             # No need for move axis
+        enable_cache: False         # No other entries need access to this data
+        # Define one source for this entry - point to data from the input entry
+        sources:
+          - name: SourcePointer     # Point to an existing data source
+            module: Null            # Import from default modules
+            kwargs:
+              entry_id: 0           # Take data from the first entry (defined above)
+              source_id: 0          # Take from the first (and only) source
+              instance_id: 1        # Take the second item - the label
+  # Validation portion
+  - name: COCO Val 2017
+    type: validation
     num_instances: Null
     entries:
       # Input
@@ -23,8 +57,8 @@ datasets:
           - name: CocoDetection
             module: torchvision.datasets
             kwargs:
-              root: data/train2017
-              annFile: data/annotations/instances_train2017.json
+              root: data/val2017
+              annFile: data/annotations/instances_val2017.json
       # Label
       - name: COCO Label
         type: label
@@ -33,41 +67,9 @@ datasets:
         move_axis: Null
         enable_cache: False
         sources:
-          - name: SourcePointer     # Point to an existing data source
+          - name: SourcePointer
             module: Null
             kwargs:
-              entry_id: 0           # From the first entry
-              source_id: 0          # From the first source
-              instance_id: 1        # Load the second item
-  # Validation set
-  - name: Validation MNIST
-    type: validation
-    num_instances: Null
-    entries:
-      - name: MNIST Image
-        type: input
-        load_as: image
-        convert_to: float32
-        move_axis: [2, 0, 1]
-        enable_cache: True
-        sources:
-          - name: MNIST
-            module: torchvision.datasets
-            kwargs:
-              root: ./data/MNIST
-              train: False          # Use validation data
-              download: True
-      # Label
-      - name: MNIST Label
-        type: label
-        load_as: integer
-        convert_to: int64
-        move_axis: Null
-        enable_cache: False
-        sources:
-          - name: SourcePointer    # Point to an existing data source
-            module: Null
-            kwargs:
-              entry_id: 0           # From the first entry
-              source_id: 0          # From the first source
-              instance_id: 1        # Load the second item
+              entry_id: 0
+              source_id: 0
+              instance_id: 1
