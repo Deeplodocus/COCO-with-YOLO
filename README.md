@@ -6,7 +6,7 @@ In this tutorial, we will walk through each step to configure a Deeplodocus proj
 
 **Prerequisite steps:**
 
-1. [Download the COCO Detection Dataset](#Download)
+1. [Download the COCO Detection Dataset](#1 Download)
 2. [Install pycocotools](#2-install-pycocotools)
 
 **Project setup:**
@@ -25,7 +25,7 @@ A copy of this project can be cloned from [here](https://github.com/Deeplodocus/
 
 ## Prerequisite Steps
 
-### Download
+### 1 Download
 
 First of all, let's download the appropriate data from the [COCO website](http://cocodataset.org/).
 
