@@ -3,7 +3,7 @@ dataloader:
   num_workers: 15       # This will depend on your CPU, you probably have at least 4 cores
 enabled:
   train: True           # Enable the trainer
-  validation: True      # Enable the validator
+  validation: False      # Enable the validator
   test: False           # There is no test data
   predict: False        # There is no prediction data
 datasets:

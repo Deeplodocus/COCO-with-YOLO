@@ -2,24 +2,24 @@
 # A skip of 20 will cause the transforms to only process every 20th batch.
 # (We may not want to visualise every batch.)
 skip: &skip
-  100
+  25
 
 # Sometimes there can be lots of false detections at the beginning of training
 # This can slow things down
 # Use initial skip to skip the first few batches of the first epoch
 initial_skip: &initial_skip
-  1000
+  0
 
 name: Output Transformer
 transforms:
-  ConcatenateDetections:
-    name: Concatenate
+  Avtivate:
+    name: Activate
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
       skip: *skip                   # How many batches to skip
       initial_skip: *initial_skip
   NonMaximumSuppression:
-    name: NonMaximumSuppression
+    name: NMS
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
       iou_threshold: 0.5            # IoU threshold for NMS
@@ -30,12 +30,16 @@ transforms:
     name: Visualize
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
+      key: data/key.txt
+      obj_threshold: 0.5
       rows: Null                    # No. of rows when displaying images
       cols: Null                    # No. of cols when displaying images
-      scale: 0.5                    # Re-scale the images before displaying
+      scale: 0.6                    # Re-scale the images before displaying
       wait: 1                       # How long to wait (ms) (0 = wait for a keypress)
       width: 2                      # Line width for drawing boxes
       lab_col: [32, 200, 32]        # Color for drawing ground truth boxes (BGR)
       det_col: [32, 32, 200]        # Color for drawing model detections (BGR)
+      font_thickness: 2
+      font_scale: 0.8
       skip: *skip                   # How many batches to skip
       initial_skip: *initial_skip

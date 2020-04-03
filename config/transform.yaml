@@ -15,7 +15,7 @@ validation:
     - '*inputs:0'                         # Point to the first input transformer
   additional_data: Null
   outputs:
-    - config/transformers/output.yaml     # Path to output transformer
+   # - config/transformers/output.yaml     # Path to output transformer
 test:
   name: Test Transform Manager
   inputs: Null

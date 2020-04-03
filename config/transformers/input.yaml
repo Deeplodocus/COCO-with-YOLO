@@ -10,6 +10,6 @@ mandatory_transforms_start:
       name: resize
       module: deeplodocus.app.transforms.yolo.input
       kwargs:
-        shape: [448, 448]
+        shape: [416, 416]
 transforms: Null
 mandatory_transforms_end: Null

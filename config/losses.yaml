@@ -1,19 +1,9 @@
-ObjectLoss:
-  name: ObjectLoss                        # Name of the Python class to use
+YOLOLoss:
+  name: YOLOLoss                        # Name of the Python class to use
   module: deeplodocus.app.losses.yolo     # Import from deeplodocus app
   weight: 1
   kwargs:
     iou_threshold: 0.5
-    obj_weight: 20                        # Equivalent to λ_noobj
-BoxLoss:
-  name: BoxLoss                           # Name of the Python class to use
-  module: deeplodocus.app.losses.yolo     # Import from deeplodocus app
-  weight: 5                               # Equivalent to lambda_coord
-  kwargs:
-    iou_threshold: 0.5
-ClassLoss:
-  name: ClassLoss                         # Name of the Python class to use
-  module: deeplodocus.app.losses.yolo     # Import from deeplodocus app
-  weight: 1
-  kwargs: {}
-
+    obj_weight: [0.5, 2]
+    box_weight: 2
+    class_weight: auto
