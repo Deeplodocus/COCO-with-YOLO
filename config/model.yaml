@@ -1,7 +1,7 @@
 name: YOLO                              # Select YOLO
 module: deeplodocus.app.models.yolo     # From the deeplodocus app
 from_file: True                         # Don't try to load from file
-file: version01/weights/YOLO_010.pt                              # No need to specify a file to load from
+file: version01/weights/YOLO_050.pt                              # No need to specify a file to load from
 input_size:                             # Specify the input size
   - [3, 480, 480]
 kwargs:                                 # Keyword arguments for the model class

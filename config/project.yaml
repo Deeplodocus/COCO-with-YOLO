@@ -7,4 +7,4 @@ logs:
   history_train_epochs: True
   history_validation: True
   notification: True
-on_wake: [clear_history(), load(), continue_training(7)]
+on_wake: [load(), continue_training(20)]

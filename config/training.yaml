@@ -1,4 +1,4 @@
-num_epochs: 13
+num_epochs: 50
 initial_epoch: 0
 shuffle: none
 saver:

@@ -4,6 +4,7 @@ YOLOLoss:
   weight: 1
   kwargs:
     iou_threshold: 0.5
-    obj_weight: [0.5, 2]
+    obj_weight: [0.5, 5]
     box_weight: 2
     class_weight: auto
+    min_class_weight: 0.1
