@@ -11,7 +11,7 @@ initial_skip: &initial_skip
 
 name: Output Transformer
 transforms:
-  Avtivate:
+  Activate:
     name: Activate
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
