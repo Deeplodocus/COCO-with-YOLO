@@ -1,10 +1,15 @@
 YOLOLoss:
-  name: YOLOLoss                        # Name of the Python class to use
-  module: deeplodocus.app.losses.yolo     # Import from deeplodocus app
-  weight: 1
+  name: YOLOLoss  # Name of the loss object
+  module: deeplodocus.app.losses.yolo  # Import from deeplodocus app
+  weight: 1  # Multiplier for loss function
   kwargs:
     iou_threshold: 0.5
-    obj_weight: [0.5, 5]
-    box_weight: 2
-    class_weight: auto
-    min_class_weight: 0.1
+    # Weights applied to cells that do not contain and object and cells that do contain an object respectively
+    obj_weight: [0.5, 1]
+    # Multiplier applied to loss from coordinate predictions
+    box_weight: 5
+    # Options: Null (no weights), auto, list weight values (w0, w1, ..., wn)
+    # Auto:  total / frequency * num_classes
+    class_weight: Null
+    # Sets a minimum class weight (may be useful when class  are very imbalanced)
+    min_class_weight: Null

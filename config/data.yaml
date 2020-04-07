@@ -1,75 +1,76 @@
 dataloader:
-  batch_size: 16        # Possible batch sizes will depend on the available memory
-  num_workers: 15       # This will depend on your CPU, you probably have at least 4 cores
+  batch_size: 8  # Possible batch sizes will depend on the available memory
+  num_workers: 8  # This will depend on your CPU, you probably have at least 4 cores
 enabled:
-  train: True           # Enable the trainer
-  validation: False      # Enable the validator
-  test: False           # There is no test data
-  predict: False        # There is no prediction data
+  train: True  # Enable the trainer
+  validation: False  # Enable the validator
+  test: False  # There is no test data
+  predict: False  # There is no prediction data
 datasets:
   # Training portion
-  - name: COCO Train 2017           # Human-readable name
-    type: train                     # Dataset type (train/validation/test/predict)
-    num_instances: Null             # Number of instances to use (Null = use all)
-    entries:                        # Define the input and label entries
+  - name: COCO Train 2017  # Human-readable name
+    type: train  # Dataset type (train/validation/test/predict)
+    num_instances: Null  # Number of instances to use (Null = use all)
+    entries:
       # Input Entry
-      - name: COCO Image            # Human-readable name
-        type: input                 # Entry type (input/label/additional data)
-        load_as: image              # Load data as image
-        convert_to: float32         # Convert to float32 (after data transforms)
-        move_axis: [2, 0, 1]        # Permute : (h x w x ch) to (ch x h x w)
-        enable_cache: True          # Give other entries access to this entry
-        # We define one source for this entry - CocoDetection from torchvision
+      - name: COCO Image  # Human-readable name
+        type: input  # Entry type (input/label/additional data)
+        load_as: image  # Load data as image
+        convert_to: float32  # Convert to float32
+        move_axis: [2, 0, 1]  # Permute : (h x w x ch) to (ch x h x w)
+        enable_cache: True  # Give other entries access to this entry
+        # We define one source for this entry - CocoDetection from torchvision.datasets
         sources:
           - name: CocoDetection
             module: torchvision.datasets
             kwargs:
-              root: data/train2017
-              annFile: data/annotations/instances_train2017.json
+              root: data/train2017  # Path to training image directory
+              annFile: data/annotations/instances_train2017.json  # Training annotations
       # Label Entry
-      - name: COCO Label            # Human-readable name
-        type: label                 # Entry type (input/label/additional data)
-        load_as: given              # Do not change data type on loading
-        convert_to: float32         # Convert to float32 (after data transforms)
-        move_axis: Null             # No need for move axis
-        enable_cache: False         # No other entries need access to this data
+      - name: COCO Label  # Human-readable name
+        type: label  # Entry type (input/label/additional data)
+        load_as: given  # Do not use any additional methods on loading
+        convert_to: float32  # Convert to float32 (after data transforms)
+        move_axis: Null  # No need for move axis
+        enable_cache: False  # No other entries need access to this data
         # Define one source for this entry - point to data from the input entry
         sources:
-          - name: SourcePointer     # Point to an existing data source
-            module: Null            # Import from default modules
+          - name: SourcePointer   # Point to an existing data source
+            module: Null  # Import from default modules
             kwargs:
-              entry_id: 0           # Take data from the first entry (defined above)
-              source_id: 0          # Take from the first (and only) source
-              instance_id: 1        # Take the second item - the label
+              entry_id: 0  # Take data from the first entry (defined above)
+              source_id: 0  # Take from the first (and only) source
+              instance_id: 1  # Take the second item - the label
   # Validation portion
-  - name: COCO Val 2017
-    type: validation
-    num_instances: Null
+  - name: COCO Val 2017  # Human-readable name
+    type: validation  # Dataset type (train/validation/test/predict)
+    num_instances: Null  # Number of instances to use (Null = use all)
     entries:
       # Input
-      - name: COCO Image
-        type: input
-        load_as: image
+      - name: COCO Image  # Human-readable name
+        type: input  # Entry type (input/label/additional data)
+        load_as: image  # Load data as image
         convert_to: float32
-        move_axis: [2, 0, 1]
-        enable_cache: True
+        move_axis: [2, 0, 1]  # Permute : (h x w x ch) to (ch x h x w)
+        enable_cache: True  # Give other entries access to this entry
+        # We define one source for this entry - CocoDetection from torchvision.datasets
         sources:
           - name: CocoDetection
             module: torchvision.datasets
             kwargs:
-              root: data/val2017
-              annFile: data/annotations/instances_val2017.json
+              root: data/val2017  # Path to val image directory
+              annFile: data/annotations/instances_val2017.json  # Validation annotations
       # Label
-      - name: COCO Label
-        type: label
-        load_as: given
-        convert_to: float32
-        move_axis: Null
-        enable_cache: False
+      - name: COCO Label  # Human-readable name
+        type: label  # Entry type (input/label/additional data)
+        load_as: given  # Do not use any additional methods on loading
+        convert_to: float32  # Convert to float32
+        move_axis: Null  # No need for move axis
+        enable_cache: False  # No other entries need access to this data
         sources:
-          - name: SourcePointer
-            module: Null
+          - name: SourcePointer   # Point to an existing data source
+            module: Null  # Import from default modules
             kwargs:
-              entry_id: 0
-              source_id: 0
-              instance_id: 1
+              entry_id: 0  # Take data from the first entry (defined above)
+              source_id: 0  # Take from the first (and only) source
+              instance_id: 1  # Take the second item - the label

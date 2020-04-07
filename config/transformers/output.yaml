@@ -1,6 +1,5 @@
 # Define skip - for use in multiple transforms
-# A skip of 20 will cause the transforms to only process every 20th batch.
-# (We may not want to visualise every batch.)
+# A skip of 20 will cause the transforms to only process every 25th batch
 skip: &skip
   25
 
@@ -16,30 +15,30 @@ transforms:
     name: Activate
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      skip: *skip                   # How many batches to skip
+      skip: *skip
       initial_skip: *initial_skip
   NonMaximumSuppression:
     name: NMS
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      iou_threshold: 0.5            # IoU threshold for NMS
-      obj_threshold: 0.5            # Threshold for suppression by objectness score
-      skip: *skip                   # How many batches to skip
+      iou_threshold: 0.5  # IoU threshold for NMS
+      obj_threshold: 0.5  # Threshold for suppression by objectness score
+      skip: *skip
       initial_skip: *initial_skip
   Visualization:
     name: Visualize
     module: deeplodocus.app.transforms.yolo.output
     kwargs:
-      key: data/key.txt
-      obj_threshold: 0.5
-      rows: Null                    # No. of rows when displaying images
-      cols: Null                    # No. of cols when displaying images
-      scale: 0.6                    # Re-scale the images before displaying
-      wait: 1                       # How long to wait (ms) (0 = wait for a keypress)
-      width: 2                      # Line width for drawing boxes
-      lab_col: [32, 200, 32]        # Color for drawing ground truth boxes (BGR)
-      det_col: [32, 32, 200]        # Color for drawing model detections (BGR)
+      obj_threshold: 0.5  # Objectness threshold
+      key: data/key.txt  # Key of object class names
+      rows: Null  # No. of rows when displaying images (Null = auto)
+      cols: Null  # No. of cols when displaying images (Null = auto)
+      scale: 0.6  # Re-scale the images before displaying
+      wait: 1  # How long to wait (ms) (0 = wait for a keypress)
+      width: 2  # Line width for drawing boxes
+      lab_col: [32, 200, 32]  # Color for drawing ground truth boxes (BGR)
+      det_col: [32, 32, 200]  # Color for drawing model detections (BGR)
       font_thickness: 2
       font_scale: 0.8
-      skip: *skip                   # How many batches to skip
+      skip: *skip
       initial_skip: *initial_skip

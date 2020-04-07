@@ -1,10 +1,10 @@
 num_epochs: 50
 initial_epoch: 0
-shuffle: none
+shuffle: all # Shuffle all between epochs
 saver:
-  method: pytorch
-  save_signal: epoch
-  overwrite: False
+  method: pytorch  # Save as .pt file
+  save_signal: epoch  # Save at the end of each epoch
+  overwrite: False  # Do not overwrite weight files
 overwatch:
-  name: Total Loss
-  condition: less
+  name: Total Loss  # Only used if save_signal = auto
+  condition: less  # Only used if save_signal = auto

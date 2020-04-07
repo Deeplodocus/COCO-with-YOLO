@@ -1,21 +1,21 @@
 train:
   name: Train Transform Manager
   inputs:
-    - config/transformers/input.yaml      # Path to input transformer
+    - config/transformers/input.yaml  # Path to input transformer
   labels:
-    - '*inputs:0'                         # Point to the first input transformer
+    - '*inputs:0'  # Point to the first input transformer
   additional_data: Null
   outputs:
-    - config/transformers/output.yaml     # Path to output transformer
+    - config/transformers/output.yaml  # Path to output transformer
 validation:
   name: Validation Transform Manager
   inputs:
-    - config/transformers/input.yaml      # Path to input transformer
+    - config/transformers/input.yaml  # Path to input transformer
   labels:
-    - '*inputs:0'                         # Point to the first input transformer
+    - '*inputs:0'  # Point to the first input transformer
   additional_data: Null
   outputs:
-   # - config/transformers/output.yaml     # Path to output transformer
+    - config/transformers/output.yaml  # Path to output transformer
 test:
   name: Test Transform Manager
   inputs: Null

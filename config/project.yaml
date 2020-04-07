@@ -1,10 +1,16 @@
 session: version01
 cv_library: opencv
-device: auto
-device_ids: auto
+device: auto  # Automatically use GPU if available
+device_ids: auto  # Use all available GPU devices
 logs:
-  history_train_batches: True
+  history_train_batches: False
   history_train_epochs: True
   history_validation: True
   notification: True
-on_wake: [load(), continue_training(20)]
+on_wake:
+  #- load()  # Load everything
+  #- train()  # Train (num epochs specified in training.yaml)
+  #- edit_optimizer(lr=0.001)  # Reduce the learning rate
+  #- continue_training(50)   # Continue to train
+  #- edit_optimizer(lr=0.0001)  # Reduce the learning raate
+  #- continue_training(50)  # Continue to train
