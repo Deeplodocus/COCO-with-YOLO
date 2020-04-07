@@ -1,5 +1,7 @@
 # Deeplodocus project ignore
-data/
+data/annotations
+data/train2017
+data/val2017
 version*/
 *.log
 .idea/
