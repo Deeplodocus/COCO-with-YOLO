@@ -1,5 +1,5 @@
 dataloader:
-  batch_size: 8  # Possible batch sizes will depend on the available memory
+  batch_size: 12  # Possible batch sizes will depend on the available memory
   num_workers: 8  # This will depend on your CPU, you probably have at least 4 cores
 enabled:
   train: True  # Enable the trainer

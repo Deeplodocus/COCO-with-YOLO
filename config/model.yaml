@@ -6,7 +6,7 @@ input_size: [3, 416, 416]  # Specify the input size
 kwargs:  # Keyword arguments for the model class
   num_classes: 91  # Number of classes in COCO
   backbone:  # Specify the backbone
-    name: Darknet53  # Select Darknet19 (Darknet53 is also available)
+    name: Darknet19  # Select Darknet19 (Darknet53 is also available)
     module: deeplodocus.app.models.darknet # Point to the darknet module
     kwargs:  # Keyword arguments for the backbone
       num_channels: 3  # Tell it to expect an input with 3 channels
